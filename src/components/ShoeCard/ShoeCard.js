@@ -81,20 +81,20 @@ const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const ImageMask = styled.div`
-  border-radius: 16px 16px 4px 4px;
-  overflow: hidden;
-`;
-
 const Image = styled.img`
   display: block;
   width: 100%;
   transform-origin: 50% 75%;
 
   transition: transform 500ms;
+`;
+
+const ImageMask = styled.div`
+  border-radius: 16px 16px 4px 4px;
+  overflow: hidden;
 
   @media (prefers-reduced-motion: no-preference) {
-    &:hover {
+    &:hover ${Image} {
       transform: scale(110%);
       transition: transform 150ms;
     }
@@ -138,6 +138,13 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+
+  transition: filter 500ms;
+
+  ${ImageMask}:hover + & {
+    transition: filter 150ms;
+    filter: brightness(110%);
+  }
 `;
 
 const SaleFlag = styled(Flag)`
