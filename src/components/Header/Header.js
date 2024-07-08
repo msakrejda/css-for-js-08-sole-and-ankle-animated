@@ -52,6 +52,23 @@ const Header = () => {
   );
 };
 
+const NavLink = (props) => {
+  return (
+    <NavLinkWrapper>
+      <DefaultNavLink {...props} />
+      <HoverNavLink {...props} />
+    </NavLinkWrapper>
+  );
+}
+
+const NavLinkWrapper = styled.div`
+  position: relative;
+  overflow: clip;
+  &:first-of-type {
+    color: var(--color-secondary);
+  }
+`;
+
 const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
@@ -114,15 +131,35 @@ const Filler = styled.div`
   }
 `;
 
-const NavLink = styled.a`
+const BaseNavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
 
-  &:first-of-type {
-    color: var(--color-secondary);
+  display: block;
+  transition: transform 500ms;
+`;
+
+const DefaultNavLink = styled(BaseNavLink)`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+  ${NavLinkWrapper}:hover > & {
+    transform: translateY(-100%);
+    transition: transform 150ms;
+  }
+`;
+
+const HoverNavLink = styled(BaseNavLink)`
+  font-weight: ${WEIGHTS.bold};
+  transform: translateY(100%);
+
+  ${NavLinkWrapper}:hover > & {
+    transform: translateY(0%);
+    transition: transform 150ms;
   }
 `;
 
