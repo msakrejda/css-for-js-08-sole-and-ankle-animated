@@ -140,25 +140,29 @@ const BaseNavLink = styled.a`
 
   display: block;
   transition: transform 500ms;
+  transform-style: preserve-3d;
+  perspective: 1024px;
 `;
 
 const DefaultNavLink = styled(BaseNavLink)`
   position: absolute;
   left: 0px;
   top: 0px;
+  transform-origin: center top;
 
   ${NavLinkWrapper}:hover > & {
-    transform: translateY(-100%);
+    transform: rotate3d(1, 0, 0, 90deg) translateZ(-1rem);
     transition: transform 150ms;
   }
 `;
 
 const HoverNavLink = styled(BaseNavLink)`
+  transform-origin: center top;
   font-weight: ${WEIGHTS.bold};
-  transform: translateY(100%);
+  transform: translateY(1rem) rotate3d(1, 0, 0, 90deg);
 
   ${NavLinkWrapper}:hover > & {
-    transform: translateY(0%);
+    transform: translateY(0rem) rotate3d(1, 0, 0, 0deg);
     transition: transform 150ms;
   }
 `;
